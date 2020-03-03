@@ -1,4 +1,5 @@
 # basic-nginx-ingress
+A sample working nginx ingress controller for GKE.
 
 ## Way 1
 * Step 1 : prerequisites
@@ -13,12 +14,10 @@
 * Step 1: helm install pub-ing stable/nginx-ingress --namespace ingress-nginx
 * Step 2: kubectl apply -f cafe.yaml
 * Step 3: kubectl apply -f cafe-ing.yaml
-### Observation:
-* On GKE, the ingress resource does not get an external ip, but the services are accessible via the public ip of the ingress controller
 
 ## Way 3
-* Step 1: helm install pri-ing stable/nginx-ingress --set controller.service.annotations."cloud\.google\.com/load-balancer-type"="Internal" --namespace ingress-nginx
+* Step 1: helm install nginx-ingress stable/nginx-ingress --namespace ingress-nginx --set controller.service.annotations."cloud\.google\.com/load-balancer-type"="Internal"
 * Step 2: kubectl apply -f cafe.yaml
 * Step 3: kubectl apply -f cafe-ing.yaml
-### Observation:
-* works with private network, but the IPs are different for nginx controller and ingress controller
+### Note:
+* Way to create a ingress controller with internal / private ip
